@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: vivere-controle-estoque
+    runtime: docker
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: APP_NAME
+        value: Controle de Estoque
+      - key: APP_TIMEZONE
+        value: America/Sao_Paulo
+      - key: APP_BASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_PUBLISHABLE_KEY
+        sync: false
