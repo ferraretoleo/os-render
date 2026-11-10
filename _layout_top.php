@@ -32,6 +32,7 @@ $pageTitle = $pageTitle ?? 'Controle de Estoque';
                 <a class="rounded-lg bg-slate-800 px-3 py-2 hover:bg-slate-700" href="movimentacao.php">Movimentação</a>
                 <a class="rounded-lg bg-slate-800 px-3 py-2 hover:bg-slate-700" href="historico.php">Histórico</a>
                 <a class="rounded-lg bg-emerald-700 px-3 py-2 hover:bg-emerald-600" href="pedido.php">Compra</a>
+                <a class="rounded-lg bg-violet-700 px-3 py-2 hover:bg-violet-600" href="orcamentos.php">Orçamentos</a>
 
                 <?php if (isAdmin()): ?>
                     <a class="rounded-lg bg-slate-800 px-3 py-2 hover:bg-slate-700" href="relatorio_pedidos.php">Relatório de compras</a>

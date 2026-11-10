@@ -7,6 +7,23 @@ function e(?string $value): string
     return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
 }
 
+function textLength(string $value): int
+{
+    if ($value === '') {
+        return 0;
+    }
+    return preg_match_all('/./us', $value, $matches) ?: 0;
+}
+
+function truncateText(string $value, int $limit): string
+{
+    if ($limit < 1 || $value === '') {
+        return '';
+    }
+    preg_match_all('/./us', $value, $matches);
+    return implode('', array_slice($matches[0] ?? [], 0, $limit));
+}
+
 function flash(string $type, string $message): void
 {
     $_SESSION['flash'][] = compact('type', 'message');

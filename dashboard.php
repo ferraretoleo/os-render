@@ -56,6 +56,17 @@ $pendingCountRows = $supabase->select('solicitacoes_compra', [
 
 $pendingCount = count($pendingCountRows);
 
+// O painel continua funcionando mesmo antes da migração opcional de orçamentos.
+try {
+    $pendingBudgetRows = $supabase->select('orcamentos', [
+        'select' => 'id',
+        'status' => 'eq.pendente',
+    ]);
+    $pendingBudgetCount = count($pendingBudgetRows);
+} catch (Throwable $e) {
+    $pendingBudgetCount = 0;
+}
+
 require __DIR__ . '/_layout_top.php';
 ?>
 
@@ -127,7 +138,7 @@ require __DIR__ . '/_layout_top.php';
     </aside>
 
     <section class="min-w-0">
-<div class="grid gap-4 md:grid-cols-3">
+<div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
     <div class="rounded-2xl bg-white p-5 shadow-sm">
         <p class="text-sm text-slate-500">Materiais listados</p>
         <p class="mt-2 text-3xl font-bold"><?= $totalItems ?></p>
@@ -140,6 +151,10 @@ require __DIR__ . '/_layout_top.php';
         <p class="text-sm text-slate-500">Status</p>
         <p class="mt-2 text-lg font-semibold"><?= count($critical) ? 'Requer atenção' : 'Estoque saudável' ?></p>
     </div>
+    <a href="orcamentos.php?status=pendente" class="rounded-2xl bg-white p-5 shadow-sm transition hover:ring-2 hover:ring-violet-300">
+        <p class="text-sm text-slate-500">Orçamentos pendentes</p>
+        <p class="mt-2 text-3xl font-bold text-violet-700"><?= $pendingBudgetCount ?></p>
+    </a>
 </div>
 
 <?php if ($critical): ?>
